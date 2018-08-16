@@ -1,12 +1,12 @@
 html {
   font-size: 10px;
-  background: url(http://i.imgur.com/b9r5sEL.jpg) bottom center;
+  background: url(https://images.pexels.com/photos/210799/pexels-photo-210799.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260) bottom center;
   background-size: cover;
 }
 body,html {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Permanent Marker', cursive;
 }
 
 .keys {
@@ -18,33 +18,34 @@ body,html {
 }
 
 .key {
-  border: .4rem solid black;
-  border-radius: .5rem;
-  margin: 1rem;
+  border: 1rem solid #15f4f8ed;
+  border-radius: 7.5rem;
+  margin: 0.5rem;
   font-size: 1.5rem;
-  padding: 1rem .5rem;
+  padding: 3rem;
   transition: all .07s ease;
   width: 10rem;
   text-align: center;
   color: white;
-  background: rgba(0,0,0,0.4);
-  text-shadow: 0 0 .5rem black;
+  background: rgba(242, 62, 193, 0.81);
+  text-shadow: 0 0 0.5rem black;
 }
 
 .playing {
   transform: scale(1.1);
-  border-color: #ffc600;
-  box-shadow: 0 0 1rem #ffc600;
+  border-color: #ff0055;
+  box-shadow: 0 0 1rem #ff0055;
 }
 
 kbd {
   display: block;
   font-size: 4rem;
+  font-family: 'Permanent Marker', cursive;
 }
 
 .sound {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   text-transform: uppercase;
-  letter-spacing: .1rem;
-  color: #ffc600;
+  letter-spacing: .3rem;
+  color: #0df4f7;
 }
