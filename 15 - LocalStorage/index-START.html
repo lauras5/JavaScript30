@@ -21,14 +21,86 @@
     </ul>
     <form class="add-items">
       <input type="text" name="item" placeholder="Item Name" required>
-      <input type="submit" value="+ Add Item">
+      <input class="addBtn" type="submit" value="+ Add Item">
+      <br>
+      <input class='deleteBtn' type="submit" value="Delete All Items">
+      <input class='selectBtn' type="submit" value="Select All Items">
     </form>
   </div>
 
 <script>
   const addItems = document.querySelector('.add-items');
+  const deleteBtn = document.querySelector('.deleteBtn');
+  const selectBtn = document.querySelector('.selectBtn');
   const itemsList = document.querySelector('.plates');
-  const items = [];
+  const items = JSON.parse(localStorage.getItem('items')) || []; // storing data here
+  // if items are not found in local storage, then get from array 
+
+  function addItem(e) {
+    e.preventDefault(); // stops form from reloading/sending data
+    const text = (this.querySelector('[name=item]')).value; // grabbing attribute w/ []
+    const item = {
+      // text: text,
+      text,
+      done: false
+    }
+    items.push(item);
+    populateList(items, itemsList) // rerendering entire list, update only one instance for quicker  
+    localStorage.setItem('items', JSON.stringify(items)); // turns into string to store in local
+    this.reset(); // form element that resets/clears form
+  }
+
+  function populateList(plates = [], platesList) { // default is empty obj
+    // will store list of items
+    platesList.innerHTML = plates.map((plate, i) => {
+      return `
+        <li>
+          <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked' : ''} />
+          <label for="item${i}">${plate.text}</label>
+        </li> 
+      `;
+    }).join('');
+  }
+
+  function toggleDone(e) {
+    // event delegation
+    if(!e.target.matches('input')) return; // skip this unless it's an input
+    // go to items array, find checked, and set done to be true/false
+    console.log(e.target)
+    const el = e.target;
+    const index = el.dataset.index;
+    // shows you where item is at in the array
+    // this is why you added data attr index and returned index w/ map
+    console.log(el.dataset.index);
+    items[index].done = !items[index].done; // flips between true/false
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
+  }
+
+  // function to delete all list items
+  function deleteAll(e) {
+    e.preventDefault();
+    localStorage.clear();
+    populateList(items, itemsList);
+    itemsList.innerHTML = '';
+  }
+
+  // selects all list items
+  function selectAll(e) {
+    e.preventDefault();
+    // get index of all w/ dataset
+    // if done === 'false' , set to 'true'
+    // update in localStorage
+
+  }
+
+  addItems.addEventListener('submit', addItem); //covering all bases
+  itemsList.addEventListener('click', toggleDone);
+  deleteBtn.addEventListener('click', deleteAll);
+  selectBtn.addEventListener('click', selectAll);
+  
+
+  populateList(items, itemsList); // on page load
 
 </script>
 
