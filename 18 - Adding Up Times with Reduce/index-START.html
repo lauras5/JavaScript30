@@ -182,6 +182,17 @@
     </li>
   </ul>
 <script>
+  // will be using map & reduce
+  const timeNodes = Array.from(document.querySelectorAll('[data-time]'));
+
+  const seconds = timeNodes
+    .map(node => node.dataset.time)
+    .map(timeCode => {
+
+    })
+
+  console.log(timeNodes);
+
 </script>
 </body>
 </html>
